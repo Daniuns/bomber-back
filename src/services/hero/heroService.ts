@@ -30,10 +30,9 @@ class Heroes {
                 if(condition) return st;
             }
         ).filter(v => !!v)[0];
-            console.log('position', position);
         if(!position) return;
 
-        const newHero = {...position, id};
+        const newHero = {...position, id, speed: 0.5};
 
         this.heroes = [...this.heroes, newHero];
             console.log('newHero', newHero);
