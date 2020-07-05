@@ -13,14 +13,7 @@ const app = express();
 
 const server = http.createServer(app)
 
-// let listMessages: IMessage[] = [];
-
 const io = socketIO(server)
-
-// const addMessage = (message: IMessage) => {
-//     message = {...message, date: new Date().getTime()}
-//     listMessages.push(message)
-// }
 
 io.on('connection', (socket: any) => {
     console.log('new user connected.', socket.id);
@@ -28,9 +21,9 @@ io.on('connection', (socket: any) => {
     io.sockets.emit('receiveMap', mapService.generateMap());
     io.sockets.emit('createHero', heroesService.createHero(socket.id));
     io.sockets.emit('heroesList', heroesService.getHeroes());
-    socket.on('attHero', (hero: IHero) => {
+    socket.on('attHero', async (hero: IHero) => {
         console.log('atualiza esse hero', hero);
-        heroesService.setHero(hero);
+        await heroesService.setHero(hero);
         io.sockets.emit('heroesList', heroesService.getHeroes());
     });
     // io.sockets.emit('enteredAt', new Date().getTime());
