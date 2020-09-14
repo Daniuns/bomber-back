@@ -24,9 +24,6 @@ const io = require("socket.io")(server, {
 });
 
 io.origins((origin: any, callback: any) => {
-    if (origin !== 'https://app-bomber.herokuapp.com/') {
-        return callback('origin not allowed', false);
-    }
     callback(null, true);
   });
 
