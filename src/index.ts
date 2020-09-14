@@ -2,10 +2,12 @@
 import mapService from './services/map/map';
 import { IHero } from './interfaces/hero';
 import heroesService from './services/hero/heroService';
+import { allowCors } from './middlewares/allowCors';
 
 const express = require('express');
 const http = require('http')
 const app = express();
+app.use(allowCors);
 const server = http.createServer(app)
 const PORT = 4000;
 
