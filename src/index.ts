@@ -15,6 +15,8 @@ const server = http.createServer(app)
 
 const io = socketIO(server)
 
+io.set('origins', '*:*');
+
 io.on('connection', (socket: any) => {
     console.log('new user connected.', socket.id);
 
