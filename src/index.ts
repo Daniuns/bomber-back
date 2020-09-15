@@ -16,7 +16,7 @@ const server = require('http').createServer();
 // })
 
 const io = require("socket.io")(server, 
-    {path: '/', origins: 'http://localhost:*, https://app-bomber.herokuapp.com:*', transports: ['polling', 'websocket'], serverClient: false});
+    {path: '/', origins: '*:*, https://app-bomber.herokuapp.com/', transports: ['polling', 'websocket'], serverClient: false});
     // io.origins(['https://app-bomber.herokuapp.com:3000']);
 server.listen(4000);
 
