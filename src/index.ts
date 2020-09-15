@@ -7,8 +7,8 @@ import { allowCors } from './middlewares/allowCors';
 
 const express = require('express');
 const app = express();
-const server = require('http').createServer(app);
 app.use(allowCors);
+const server = require('http').createServer(app);
 
 const io = require("socket.io")(server, {origin: '*:*'});
     // io.origins(['https://app-bomber.herokuapp.com:3000']);
