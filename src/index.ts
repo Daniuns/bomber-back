@@ -3,23 +3,14 @@ import mapService from './services/map/map';
 import { IHero } from './interfaces/hero';
 import heroesService from './services/hero/heroService';
 import cors from 'cors';
-// import { allowCors } from './middlewares/allowCors';
+import { allowCors } from './middlewares/allowCors';
 
 const express = require('express');
 const app = express();
 const server = require('http').createServer(app);
-// app.use(allowCors);
-// const server = http.createServer(app)
-// const PORT = 4000;
+app.use(allowCors);
 
-// server.listen(PORT, () => { 
-//     console.log(`listen at ${PORT} port`);
-// })
-
-app.use(cors());
-
-const io = require("socket.io")(server, 
-    {path: '/', origins: '*:*, https://app-bomber.herokuapp.com/', transports: ['polling', 'websocket'], serverClient: false});
+const io = require("socket.io")(server, {origin: '*:*'});
     // io.origins(['https://app-bomber.herokuapp.com:3000']);
     server.listen(4000);
 
