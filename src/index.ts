@@ -2,30 +2,20 @@
 import mapService from './services/map/map';
 import { IHero } from './interfaces/hero';
 import heroesService from './services/hero/heroService';
-import { allowCors } from './middlewares/allowCors';
+// import { allowCors } from './middlewares/allowCors';
 
-const express = require('express');
-const http = require('http')
-const app = express();
-app.use(allowCors);
-const server = http.createServer(app)
-const PORT = 4000;
+// const express = require('express');
+// const http = require('http')
+// const app = express();
+// app.use(allowCors);
+// const server = http.createServer(app)
+// const PORT = 4000;
 
-server.listen(PORT, () => { 
-    console.log(`listen at ${PORT} port`);
-})
+// server.listen(PORT, () => { 
+//     console.log(`listen at ${PORT} port`);
+// })
 
-const io = require("socket.io")(server, {
-    handlePreflightRequest: (req: any, res: any) => {
-        const headers = {
-            "Access-Control-Allow-Headers": "Content-Type, Authorization",
-            "Access-Control-Allow-Origin": req.headers.origin, //or the specific origin you want to give access to,
-            "Access-Control-Allow-Credentials": true
-        };
-        res.writeHead(200, headers);
-        res.end();
-    }
-});
+const io = require("socket.io")(4000, { path: '/'});
 
 io.on('connection', (socket: any) => {
     console.log('new user connected.', socket.id);
