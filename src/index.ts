@@ -2,7 +2,7 @@
 import mapService from './services/map/map';
 import { IHero } from './interfaces/hero';
 import heroesService from './services/hero/heroService';
-import cors from 'cors';
+// import cors from 'cors';
 import { allowCors } from './middlewares/allowCors';
 
 const express = require('express');
@@ -12,7 +12,7 @@ app.use(allowCors);
 
 const io = require("socket.io")(server, {origin: '*:*'});
     // io.origins(['https://app-bomber.herokuapp.com:3000']);
-    server.listen(4000);
+    server.listen(8080);
 
 io.on('connection', (socket: any) => {
     console.log('new user connected.', socket.id);
