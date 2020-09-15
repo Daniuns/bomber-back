@@ -8,11 +8,11 @@ import cors from 'cors';
 const express = require('express');
 const app = express();
 app.use(cors);
-const server = require('http').createServer(app);
+const server = app.listen(8080);
+// server.listen(8080);
 
 const io = require("socket.io")(server, {origin: '*:*'});
     // io.origins(['https://app-bomber.herokuapp.com:3000']);
-    server.listen(8080);
 
 io.on('connection', (socket: any) => {
     console.log('new user connected.', socket.id);
@@ -26,13 +26,6 @@ io.on('connection', (socket: any) => {
         io.sockets.emit('heroesList', heroesService.getHeroes());
     });
     // io.sockets.emit('enteredAt', new Date().getTime());
-
-
-    // socket.on('attListMessages', (message: IMessage) => {
-    //     addMessage(message)
-    //     io.sockets.emit('attListMessages', listMessages);
-    // })
-
 
     socket.on('disconnect', () => {
         console.log('User disconnected.', socket.id);
