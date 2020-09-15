@@ -11,6 +11,10 @@ app.use(allowCors);
 const server = http.createServer(app)
 const PORT = 4000;
 
+server.listen(PORT, () => { 
+    console.log(`listen at ${PORT} port`);
+})
+
 const io = require("socket.io")(server, {
     handlePreflightRequest: (req: any, res: any) => {
         const headers = {
@@ -22,10 +26,6 @@ const io = require("socket.io")(server, {
         res.end();
     }
 });
-
-io.origins((origin: any, callback: any) => {
-    callback(null, true);
-  });
 
 io.on('connection', (socket: any) => {
     console.log('new user connected.', socket.id);
@@ -52,9 +52,4 @@ io.on('connection', (socket: any) => {
         heroesService.disconnected(socket.id);
         io.sockets.emit('heroesList', heroesService.getHeroes());
     });
-})
-
-
-server.listen(PORT, () => { 
-    console.log(`listen at ${PORT} port`);
 })
