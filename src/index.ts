@@ -2,12 +2,12 @@
 import mapService from './services/map/map';
 import { IHero } from './interfaces/hero';
 import heroesService from './services/hero/heroService';
-// import cors from 'cors';
-import { allowCors } from './middlewares/allowCors';
+import cors from 'cors';
+// import { allowCors } from './middlewares/allowCors';
 
 const express = require('express');
 const app = express();
-app.use(allowCors);
+app.use(cors);
 const server = require('http').createServer(app);
 
 const io = require("socket.io")(server, {origin: '*:*'});
