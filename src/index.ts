@@ -5,7 +5,7 @@ import heroesService from './services/hero/heroService';
 // import { allowCors } from './middlewares/allowCors';
 
 // const express = require('express');
-// const http = require('http')
+const server = require('http').createServer();
 // const app = express();
 // app.use(allowCors);
 // const server = http.createServer(app)
@@ -15,7 +15,10 @@ import heroesService from './services/hero/heroService';
 //     console.log(`listen at ${PORT} port`);
 // })
 
-const io = require("socket.io")(4000, { path: '/'});
+const io = require("socket.io")(server, 
+    {path: '/', origins: ['https://app-bomber.herokuapp.com:3000'], transports: ['polling', 'websocket'], serverClient: false});
+    // io.origins(['https://app-bomber.herokuapp.com:3000']);
+server.listen(4000);
 
 io.on('connection', (socket: any) => {
     console.log('new user connected.', socket.id);
@@ -42,4 +45,4 @@ io.on('connection', (socket: any) => {
         heroesService.disconnected(socket.id);
         io.sockets.emit('heroesList', heroesService.getHeroes());
     });
-})
+});
