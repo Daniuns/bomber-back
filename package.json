@@ -5,8 +5,9 @@
   "author": "Daniel",
   "license": "MIT",
   "scripts": {
-    "start": "node ./build/index.js",
-    "dev": "ts-node-dev --respawn --transpileOnly ./src/index.ts"
+    "start": "npm run build && node ./build/index.js",
+    "dev": "ts-node-dev --respawn --transpileOnly ./src/index.ts",
+    "build": "tsc"
   },
   "dependencies": {
     "@types/cors": "^2.8.7",
