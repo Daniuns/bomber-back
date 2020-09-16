@@ -2,17 +2,29 @@
 import mapService from './services/map/map';
 import { IHero } from './interfaces/hero';
 import heroesService from './services/hero/heroService';
-import cors from 'cors';
-// import { allowCors } from './middlewares/allowCors';
+import https from 'http';
+// import cors from 'cors';
+import { allowCors } from './middlewares/allowCors';
 
 const express = require('express');
 const app = express();
-app.use(cors);
-const server = app.listen(8080);
-// server.listen(8080);
+app.use(allowCors);
+    
+const server = app.listen(8080, () => {
+    console.log(`server started: PORT: 8080`);
+});
 
 const io = require("socket.io")(server, {origin: '*:*'});
     // io.origins(['https://app-bomber.herokuapp.com:3000']);
+
+    app.get('/test', function(req: any, res:any) {
+        res.send('Everything Ok!');
+      });
+
+
+
+    process.on('unhandledRejection', () => { /* ignore */ });
+
 
 io.on('connection', (socket: any) => {
     console.log('new user connected.', socket.id);
