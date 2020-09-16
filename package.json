@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "tsc": "tsc",
-    "dev": "ts-node-dev --respawn --transpileOnly ./src/index.ts",
+    "start": "ts-node-dev --respawn --transpileOnly ./src/index.ts",
     "prod": "tsc && node ./build/app.js"
   },
   "dependencies": {
